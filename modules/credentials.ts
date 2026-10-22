@@ -187,7 +187,7 @@ export async function getUserDataLagacy(): Promise<UserData> {
     // get required data for decryption
     const keyBuffer = await getKeyBuffer()
     // async fetch of user data
-    const { Data: data } = await browser.storage.local.get(['Data'])
+    const { Data: data } = await browser.storage.local.get(['Data']) as any
 
     // check if Data exists, else return
     if (data === undefined || data === 'undefined') {
@@ -241,7 +241,7 @@ export async function upgradeUserData(encryptionLevel: number): Promise<number> 
     switch (encryptionLevel) {
         case 1: {
             // This branch probably/hopefully will not be called anymore...
-            const userData = await browser.storage.local.get(['asdf', 'fdsa'])
+            const userData: any = await browser.storage.local.get(['asdf', 'fdsa'])
             await setUserData({ user: atob(userData.asdf), pass: atob(userData.fdsa) }, 'zih')
             await browser.storage.local.remove(['asdf', 'fdsa'])
             break

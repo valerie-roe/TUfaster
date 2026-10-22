@@ -1,14 +1,14 @@
 'use strict'
 
 
-import * as credentials from '@/MAIN/src/modules/credentials'
-import * as otp from '@/MAIN/src/modules/otp'
-import * as owaFetch from '@/MAIN/src/modules/owaFetch'
-import * as opalInline from '@/MAIN/src/modules/opalInline'
-import { isFirefox } from '@/MAIN/src/modules/firefoxCheck'
+import * as credentials from '@/modules/credentials'
+import * as otp from '@/modules/otp'
+import * as owaFetch from '@/modules/owaFetch'
+import * as opalInline from '@/modules/opalInline'
+import { isFirefox } from '@/modules/firefoxCheck'
 import rockets from "@/MAIN/src/freshContent/rockets.json"
 import studies from '@/MAIN/src/freshContent/studies.json'
-import { initLocale, t } from '@/MAIN/src/i18n'
+import { initLocale, t } from '@/modules/i18n'
 
 
 export default defineBackground(() => {

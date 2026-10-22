@@ -6,7 +6,7 @@
 // Firefox still need to use webRequestBlocking, so we need to check if we are in Firefox
 
 import { isFirefox, getBrowserNetRequestPermissions as getBrowserPermissions } from './firefoxCheck'
-import { t } from '../i18n'
+import { t } from "@/modules/i18n"
 
 // The rules that make the magic happen
 const rules = [
@@ -99,7 +99,7 @@ export async function enableOpalHeaderListener() {
         // Remove the old rule if it exists
         await browser.declarativeNetRequest.updateDynamicRules({ removeRuleIds: rules.map((r) => r.id) })
         // Register the new rule
-        await browser.declarativeNetRequest.updateDynamicRules({ addRules: rules as browser.declarativeNetRequest.Rule[] })
+        await browser.declarativeNetRequest.updateDynamicRules({ addRules: rules as Browser.declarativeNetRequest.Rule[] })
     }
 }
 
@@ -129,7 +129,7 @@ export async function checkOpalFileStatus(): Promise<{ inline: boolean; newtab: 
 }
 
 // Function for firefox
-function headerListenerFunc(details: browser.webRequest.WebResponseHeadersDetails) {
+function headerListenerFunc(details: Browser.webRequest.OnHeadersReceivedDetails) {
     if (!details.responseHeaders) return
     const header = details.responseHeaders.find((e) => e.name.toLowerCase() === 'content-disposition')
     // if (!header?.value?.includes('.pdf')) return // Not only for PDFs anymore

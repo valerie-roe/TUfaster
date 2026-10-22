@@ -1,5 +1,5 @@
 import { getUserData } from './credentials'
-import { t } from '../i18n'
+import { t } from "@/modules/i18n"
 
 // function for custom URIEncoding
 function customURIEncoding(str: string) {
