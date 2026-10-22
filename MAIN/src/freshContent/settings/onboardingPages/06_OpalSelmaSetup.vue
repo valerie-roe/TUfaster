@@ -14,7 +14,7 @@ import ImproveOpal from '../settingPages/ImproveOpal.vue'
 import ImproveSelma from '../settingPages/ImproveSelma.vue'
 
 // composables
-import { useSettingHandler } from '../composables/setting-handler'
+import { useSettingHandler } from '../composables/setting-handler.js'
 
 export default defineComponent({
   components: {

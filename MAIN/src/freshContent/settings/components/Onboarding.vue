@@ -39,7 +39,7 @@ import { defineComponent, PropType, onMounted, onUnmounted } from 'vue'
 import Stepper from './Stepper.vue'
 
 // composables
-import { useStepper } from '../composables/stepper'
+import { useStepper } from '../composables/stepper.js'
 
 export default defineComponent({
   components: {

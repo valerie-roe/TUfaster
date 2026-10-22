@@ -1,0 +1,6 @@
+build/
+node_modules/
+.vscode/
+*.zip
+src/manifest.json
+.DS_Store
