@@ -6,7 +6,7 @@
 // Firefox still need to use webRequestBlocking, so we need to check if we are in Firefox
 
 import { isFirefox, getBrowserNetRequestPermissions as getBrowserPermissions } from './firefoxCheck'
-import { t } from "@/modules/i18n"
+import { t } from "@/lib/i18n"
 
 // The rules that make the magic happen
 const rules = [
