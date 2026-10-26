@@ -17,6 +17,8 @@
     },
     "devDependencies": {
         "@wxt-dev/module-vue": "^1.0.3",
+        "lottie-web": "^5.13.0",
+        "@tabler/icons-vue": "^3.35.0",
         "sass": "^1.106.1",
         "typescript": "^5.9.3",
         "vite": "^8.1.5",

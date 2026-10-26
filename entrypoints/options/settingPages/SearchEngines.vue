@@ -1,0 +1,85 @@
+<template>
+  <h3 class="card-body-title">{{ t('settings.pages.searchEngines.title') }}</h3>
+  <Setting v-model="searchEngineActive" :txt="t('settings.pages.searchEngines.toggle')" />
+  <p class="max-line p-margin">{{ t('settings.pages.searchEngines.help') }}</p>
+
+  <p class="search-terms p-margin">
+    <template v-for="site in uniqueSites" :key="site">
+      <span class="search-terms__bg"> {{ site[0] }}</span> &rarr; {{ siteName(site[0], site[1].name) }}<br />
+    </template>
+  </p>
+</template>
+
+<script lang="ts">
+import { defineComponent, onBeforeMount, ref, watch } from 'vue'
+import { t } from '@/lib/i18n'
+
+// types
+import type { ResponseSE } from '../types/SettingHandler.ts'
+
+// components
+import Setting from '../components/Setting.vue'
+
+// composables
+import { useSettingHandler } from '../composables/setting-handler.ts'
+
+// the actual sites
+import sites from '@/data/sites.json'
+
+export default defineComponent({
+  components: {
+    Setting
+  },
+  setup() {
+    const { se } = useSettingHandler()
+    const searchEngineActive = ref(false)
+
+    const uniqueSites = Object.entries(sites)
+      .filter(([_, site], idx, arr) => {
+        return arr.findIndex(([_, site2]) => site2.url === site.url) === idx
+      })
+      .sort((a, b) => a[0].localeCompare(b[0]))
+
+    onBeforeMount(async () => {
+      const { redirect } = (await se('check', 'redirect')) as ResponseSE
+
+      searchEngineActive.value = redirect
+
+      watch(searchEngineActive, seUpdate)
+    })
+
+    const seUpdate = async () => {
+      if (searchEngineActive.value) {
+        searchEngineActive.value = (await se('enable', 'redirect')) as boolean
+      } else await se('disable', 'redirect')
+    }
+
+    return {
+      searchEngineActive,
+      uniqueSites,
+      t,
+      siteName: (key: string, fallback: string) => {
+        const textKey = `settings.searchSites.${key}`
+        const value = t(textKey)
+        return value === textKey ? fallback : value
+      }
+    }
+  }
+})
+</script>
+
+<style lang="sass" scoped>
+.search-terms
+    line-height: 2.5
+    margin-left: 1rem
+
+    &__bg
+        margin-top: 4px
+        margin-bottom: 4px
+        padding: 4px
+        border-radius: var(--brd-rad-sm)
+        background-color: hsl(var(--clr-backgr))
+
+    @media (prefers-color-scheme: light)
+        color: var(--clr-text-help)
+</style>
