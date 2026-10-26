@@ -1,5 +1,8 @@
 dev:
-    npm run dev
+    @just _wxt
 
 autoimports:
-    npm run postinstall
+    @just _wxt prepare
+
+_wxt *args:
+    npx wxt {{ args }}
