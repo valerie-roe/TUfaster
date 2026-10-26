@@ -6,8 +6,8 @@ import * as otp from '@/lib/otp'
 import * as owaFetch from '@/lib/owaFetch'
 import * as opalInline from '@/lib/opalInline'
 import { isFirefox } from '@/lib/firefoxCheck'
-import rockets from "@/MAIN/src/freshContent/rockets.json"
-import studies from '@/MAIN/src/freshContent/studies.json'
+import rockets from "@/data/rockets.json"
+import studies from '@/data/studies.json'
 import { initLocale, t } from '@/lib/i18n'
 
 
@@ -521,7 +521,7 @@ export default defineBackground(() => {
                 break
             }
             case 'update_rocket_logo_easteregg':
-                browser.action.setIcon({ path: 'assets/icons/RocketIcons/3_120px.png' })
+                browser.action.setIcon({ path: '/icons/RocketIcons/3_120px.png' })
                 break
             case 'logout_idp':
                 logoutIdp(request.logoutDuration)

@@ -236,7 +236,7 @@ export async function owaFetch() {
                     type: 'basic',
                     message: t('content.owa.newMailMessage', { count: numberOfUnreadMails }, numberOfUnreadMails),
                     title: t('content.owa.newMailTitle'),
-                    iconUrl: '/assets/icons/RocketIcons/default_128px.png'
+                    iconUrl: '/icons/RocketIcons/default_128px.png'
                 },
                 (_id) => resolve(undefined)
             )
