@@ -18,7 +18,7 @@ import SearchEngines from '../settingPages/SearchEngines.vue'
 import { useSettingHandler } from '../composables/setting-handler.ts'
 
 // the actual sites
-import sites from '@/data/sites.json'
+import {sites} from '@/data/sites.ts'
 
 export default defineComponent({
   components: {

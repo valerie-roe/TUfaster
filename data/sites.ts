@@ -1,0 +1,55 @@
+export type TUSite = {
+    name: string,
+    url: string,
+}
+
+export const sites = {
+    hisqis: {
+        name: "HISQIS",
+        url: "https://qis.dez.tu-dresden.de/qisserver/servlet/de.his.servlet.RequestDispatcherServlet?state=template&template=user/news"
+    },
+    opal: {
+        name: "OPAL",
+        url: "https://bildungsportal.sachsen.de/opal/shiblogin?0"
+    },
+    selma: {
+        name: "selma",
+        url: "https://selma.tu-dresden.de/APP/EXTERNALPAGES/-N000000000000001,-N000155,-AEXT_willkommen"
+    },
+    slub: {
+        name: "SLUB",
+        url: "https://www.slub-dresden.de/"
+    },
+    tucloud: {
+        name: "Cloudstore TU Dresden",
+        url: "https://datashare.tu-dresden.de/"
+    },
+    tudmail: {
+        name: "Outlook Web App",
+        url: "https://msx.tu-dresden.de/owa/#path=/mail"
+    },
+    tumail: {
+        name: "Outlook Web App",
+        url: "https://msx.tu-dresden.de/owa/#path=/mail"
+    },
+    tumatrix: {
+        name: "Matrix TU Dresden",
+        url: "https://matrix.tu-dresden.de/#/"
+    },
+    tumed: {
+        name: "ePortal der Medizin",
+        url: "https://eportal.med.tu-dresden.de/login"
+    },
+    tustore: {
+        name: "Cloudstore TU Dresden",
+        url: "https://datashare.tu-dresden.de/"
+    },
+    videocampus: {
+        name: "Videocampus Sachsen",
+        url: "https://videocampus.sachsen.de/"
+    },
+    tex: {
+        name: "Overleaf ShareLaTex",
+        url: "https://tex.zih.tu-dresden.de"
+    }
+} as const satisfies Record<string, TUSite>;
