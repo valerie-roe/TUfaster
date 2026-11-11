@@ -24,7 +24,7 @@ import Setting from '../components/Setting.vue'
 import { useSettingHandler } from '../composables/setting-handler.ts'
 
 // the actual sites
-import {sites} from '@/data/sites.ts'
+import {sites} from '@/entrypoints/forward.content/sites.ts'
 
 export default defineComponent({
   components: {

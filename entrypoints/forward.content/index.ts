@@ -1,4 +1,4 @@
-import { sites } from "@/data/sites"
+import { sites } from "./sites"
 
 export default defineContentScript({
     matches: [
@@ -26,7 +26,7 @@ export default defineContentScript({
         // Basically every SE just uses this parameter when using GET
         // Startpage sometimes uses 'query' instead of 'q' but we can handle this here too
         const params = new URLSearchParams(window.location.search)
-        const keyword = (params.get('q') || params.get('query')).toLowerCase()
+        const keyword = (params.get('q') || params.get('query'))?.toLowerCase()
 
         // TODO handle Startpage (no ?q) & qwant (SPA; seems to work)
 
