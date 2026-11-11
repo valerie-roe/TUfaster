@@ -1,12 +1,15 @@
-import { defaultLoginFlow } from "./default";
+import { defaultLogin, defaultFillOTP } from "./default";
 
 export interface LoginSites {
-	login: (creds: UserCredentials, logout_cb: () => void) => Promise<boolean>;
+	login: (
+creds: UserCredentials,
+logout_cb: () => void,
+) => Promise<void | LoginError>;
 	findError: () => LoginError | undefined;
 	matches: Array<string>;
 }
 
-enum LoginError {
+export enum LoginError {
 	WRONG_CREDS = "wrong credentials",
 	NO_TOKEN = "no valid token available",
 	OTHER = "unknown login error",
@@ -16,7 +19,12 @@ export const sites = {
 	idp: {
 		matches: ["https://idp.tu-dresden.de/*"],
 
-		login: (creds) => defaultLoginFlow(creds),
+		login: async (creds) => {
+			if (await defaultLogin(creds)) return;
+			if (await defaultFillOTP()) return;
+			// one of the two above should work, so at this point something is going wrong
+			return LoginError.OTHER;
+		},
 
 		findError: () => {
 			const elem = q(".output--error") ?? q('.content p font[color="red"]');
@@ -54,8 +62,7 @@ export const sites = {
 			select.value = option.value;
 
 			q('button[name="shibLogin"]')?.click();
-			return true;
-		},
+					},
 
 		findError: () => {},
 	},
