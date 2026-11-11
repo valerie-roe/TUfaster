@@ -1,7 +1,16 @@
+import type { UserData } from "@/lib/credentials";
+import { getUserData } from "@/lib/credentials";
+
 export type OTPType = "totp" | "iotp";
 
-export function retrieveOTP(type: OTPType, indexes?: number[]): string {
-	return "";
+export async function retrieveOTP(type: OTPType, indexes?: number[]): string {
+	const otp: undefined | undefined = await browser.runtime.sendMessage({
+		cmd: "get_totp",
+	});
+
+	if (otp == undefined) throw Errors.INTERNAL;
+
+	return otp;
 }
 
 export interface UserCredentials {
@@ -9,6 +18,14 @@ export interface UserCredentials {
 	password: string;
 }
 
-export function retrieveCredentials(): UserCredentials {
-	return { password: "", username: "" };
+export async function retrieveCredentials(): Promise<UserCredentials> {
+	const creds = await browser.runtime.sendMessage({
+		cmd: "get_user_data",
+	});
+	if (creds.pass == undefined || creds.user == undefined) throw Errors.INTERNAL;
+
+	return {
+		username: creds.user,
+		password: creds.pass,
+	};
 }
