@@ -18,25 +18,11 @@ export default defineContentScript({
 		const error = site.findError();
 
 		if (error != undefined) {
-			console.log("login error occured", error);
+			console.log("login error occured: ", error);
 			return;
 		}
 
-		entry[1].login(await retrieveCredentials());
+		const platform = "platform" in site ? site.platform : undefined;
+		site.login(await retrieveCredentials(platform));
 	},
 });
-
-// "https://bildungsportal.sachsen.de/opal/*",
-// "https://cloudstore.zih.tu-dresden.de/*",
-// "https://elearning.med.tu-dresden.de/*",
-// "https://eportal.med.tu-dresden.de/*",
-// "https://git.imld.de/*",
-// "https://gitlab.hrz.tu-chemnitz.de/*",
-// "https://gitlab.mn.tu-dresden.de/*",
-// "https://matrix.tu-dresden.de/*",
-// "https://msx.tu-dresden.de/*",
-// "https://se-gitlab.inf.tu-dresden.de/*",
-// "https://selma.tu-dresden.de/*",
-// "https://*.slub-dresden.de/*",
-// "https://tex.zih.tu-dresden.de/*",
-// "https://videocampus.sachsen.de/*",

@@ -3,7 +3,10 @@ import { getUserData } from "@/lib/credentials";
 
 export type OTPType = "totp" | "iotp";
 
-export async function retrieveOTP(type: OTPType, indexes?: number[]): string {
+export async function retrieveOTP(
+	type: OTPType,
+	indexes?: number[],
+): Promise<string> {
 	const otp: undefined | undefined = await browser.runtime.sendMessage({
 		cmd: "get_totp",
 	});
@@ -18,9 +21,14 @@ export interface UserCredentials {
 	password: string;
 }
 
-export async function retrieveCredentials(): Promise<UserCredentials> {
+export type CredentialsPlatform = "zih" | "slub";
+
+export async function retrieveCredentials(
+	platform: CredentialsPlatform = "zih",
+): Promise<UserCredentials> {
 	const creds = await browser.runtime.sendMessage({
 		cmd: "get_user_data",
+		platform,
 	});
 	if (creds.pass == undefined || creds.user == undefined) throw Errors.INTERNAL;
 

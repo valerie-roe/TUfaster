@@ -1,3 +1,5 @@
+import { LoginError } from "./sites";
+
 export function defaultLogin(
 	creds: UserCredentials,
 	usernameQuery: string = "#username",
@@ -49,4 +51,23 @@ export async function defaultFillOTP(
 
 	OTPsubmitButton.click();
 	return true;
+}
+
+export function parseError(text: string): LoginError {
+	const e = text.toLowerCase();
+	switch (true) {
+		case e.includes("passwort") && e.includes("falsch"):
+		case (e.includes("password") || e.includes("credentials")) &&
+			(e.includes("wrong") || e.includes("invalid")):
+			return LoginError.WRONG_CREDS;
+
+		case e.includes("no valid token available"):
+			return LoginError.NO_TOKEN;
+
+		case e.includes("zur Zeit nicht möglich"):
+			return LoginError.RATE_LIMIT;
+
+		default:
+			return LoginError.UNKNOWN;
+	}
 }
