@@ -1,12 +1,3 @@
 {
     "extends": "./.wxt/tsconfig.json",
-    "compilerOptions": {
-        "strict": false,
-        "strictNullChecks": false,
-        "noImplicitAny": false,
-        "noImplicitThis": false,
-        "noImplicitReturns": false,
-        "importHelpers": true,
-        "skipLibCheck": true,
-    },
 }
