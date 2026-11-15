@@ -1,1 +1,3 @@
-export function notify(msg: string): void {} // TODO implement
+export function notify(msg: string): void {
+	console.log("NOTIFICATION", msg);
+} // TODO implement

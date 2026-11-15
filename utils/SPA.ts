@@ -18,16 +18,21 @@ export function spaMain(
 /** Resolves on the next DOM mutation under `target`, or rejects with `Errors.TIMEOUT`*/
 export function waitForMutation(
 	target: Node = document.body,
-	timeout: number = 3000,
+	timeout?: number,
 ): Promise<void> {
 	return new Promise((resolve, reject) => {
-		const timer = setTimeout(() => {
-			observer.disconnect();
-			reject(Errors.TIMEOUT);
-		}, timeout);
+		let timer: NodeJS.Timeout;
+		if (timeout) {
+			timer = setTimeout(() => {
+				observer.disconnect();
+				reject(Errors.TIMEOUT);
+			}, timeout);
+		}
 
 		const observer = new MutationObserver(() => {
-			clearTimeout(timer);
+			if (timeout) {
+				clearTimeout(timer);
+			}
 			observer.disconnect();
 			resolve();
 		});

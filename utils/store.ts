@@ -1,4 +1,4 @@
-interface Course {
+export interface Course {
 	name: string;
 	link: string;
 	favorite: boolean;

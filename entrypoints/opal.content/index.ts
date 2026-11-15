@@ -29,12 +29,9 @@ async function scrapeCourses() {
 	courses.sort((a, b) => a.name.localeCompare(b.name));
 
 	const oldCourses = await store.courses.getValue();
-	console.log("old", oldCourses);
-	console.log("new", courses);
 
 	if (deepEqual(courses, oldCourses)) return;
-	console.log("changed");
-	await browser.storage.local.set({ courses: courses }); // TODO update storage schema
+	await store.courses.setValue(courses);
 
 	notify(
 		oldCourses
@@ -59,7 +56,7 @@ function parseTable(tbody: HTMLElement): Array<Course> {
 
 		courses.push({
 			link: link.href,
-			name: link.textContent,
+			name: link.title,
 			favorite: qAll("icon-star-filled", row).length > 0 ? true : false,
 		});
 	}
