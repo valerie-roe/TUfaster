@@ -3,7 +3,24 @@ export function q<T extends HTMLElement = HTMLElement>(
 	parentNode?: HTMLElement,
 ): T | undefined {
 	const queryNode = parentNode ? parentNode : document;
-	return queryNode.querySelector(query) ?? undefined;
+	return queryNode.querySelector<T>(query) ?? undefined;
+}
+
+export function qMust<T extends HTMLElement = HTMLElement>(
+	query: string,
+	parentNode?: HTMLElement,
+): T {
+	const res = q<T>(query, parentNode);
+	if (!res) throw Errors.DOM_FIND;
+	return res;
+}
+
+export function qAll<T extends HTMLElement = HTMLElement>(
+	query: string,
+	parentNode?: HTMLElement,
+): Array<T> {
+	const queryNode = parentNode ? parentNode : document;
+	return Array.from(queryNode.querySelectorAll(query));
 }
 
 /**
@@ -29,8 +46,21 @@ export function q<T extends HTMLElement = HTMLElement>(
 // 	});
 // }
 
+/**
+ * Returns promise that resolves after `timeout`
+ * @param timeout in ms
+ * @returns
+ */
 export async function delay(timeout: number = 1000): Promise<void> {
 	return new Promise((resolve) => {
 		setTimeout(resolve, timeout);
 	});
+}
+
+/**
+ * Helper to click buttons like `<a href="javascript:;"/>` to avoid CSP Errors
+ */
+export function clickVoidLink(button: HTMLAnchorElement) {
+	button.removeAttribute("href");
+	button.click();
 }

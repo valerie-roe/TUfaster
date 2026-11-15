@@ -53,6 +53,29 @@ export async function defaultFillOTP(
 	return true;
 }
 
+/**
+ * Navigates the shiboleth WAYF-Selection flow
+ * @returns `true` if successfull, `false` if no Dropdown present
+ * @throws on flow internal mismatch
+ */
+export function defaultWayfLogin(): boolean {
+	const select = q<HTMLSelectElement>('select[name*="wayfselection"]');
+	if (!select) return false;
+
+	const option = Array.from(select.options).find(
+		(option) =>
+			option.innerText === "TU Dresden" ||
+			option.innerText === "Technische Universität Dresden",
+	);
+
+	if (!option) throw Errors.DOM_FIND;
+
+	select.value = option.value;
+
+	qMust('button[name*="shibLogin"]').click();
+	return true;
+}
+
 export function parseError(text: string): LoginError {
 	const e = text.toLowerCase();
 	switch (true) {

@@ -1,5 +1,10 @@
 import { delay } from "@/utils/queryDOM";
-import { defaultLogin, defaultFillOTP, parseError } from "./default";
+import {
+	defaultLogin,
+	defaultFillOTP,
+	parseError,
+	defaultWayfLogin,
+} from "./default";
 
 export interface LoginSites {
 	login: (
@@ -36,27 +41,17 @@ export const sites = {
 		},
 	},
 
-	opalShibboleth: {
-		matches: [
-			"https://bildungsportal.sachsen.de/opal/shiblogin*",
-			"https://bildungsportal.sachsen.de/opal/login*",
-		],
+	opal: {
+		matches: ["https://bildungsportal.sachsen.de/opal/*"],
 
 		login: async (_) => {
-			const select = q<HTMLSelectElement>('select[name="wayfselection"]'); // "id2" seems to be random generated, so we should probably not use it
-			if (!select) throw Errors.DOM_FIND;
+			const preLoginButton = q<HTMLAnchorElement>('a[title="Login"]'); // optional screen on some routes (e.g. opal/auth/resource/favorites)
+			if (preLoginButton) {
+				clickVoidLink(preLoginButton);
+				await delay(300);
+			}
 
-			const option = Array.from(select.options).find(
-				(option) =>
-					option.innerText === "TU Dresden" ||
-					option.innerText === "Technische Universität Dresden",
-			);
-
-			if (!option) throw Errors.DOM_FIND;
-
-			select.value = option.value;
-
-			q('button[name="shibLogin"]')?.click();
+			defaultWayfLogin();
 		},
 
 		findError: () => {},
