@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue'
-import { t } from '@/lib/i18n'
+
 
 // components
 import ChooseFaculty from '../settingPages/ChooseFaculty.vue'

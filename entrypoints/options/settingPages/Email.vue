@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, ref, watch } from 'vue'
-import { t } from '@/lib/i18n'
+
 
 // types
 import type { ResponseOWA } from '../types/SettingHandler.ts'

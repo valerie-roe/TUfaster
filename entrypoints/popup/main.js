@@ -1,5 +1,4 @@
 import studiengangConfig from "@/data/studies.json"
-import { initLocale, t } from "@/lib/i18n"
 import '@/assets/styles/popup.scss'
 import '@/assets/styles/components/switch.scss'
 import '@/assets/styles/components/share.scss'
@@ -39,7 +38,6 @@ const dropdownUpdateId = '56tzoguhjk'
 
 // TODO
 window.onload = async () => {
-    await initLocale()
     shareHTML = t('popup.shareHtml')
     bananaHTML = t('popup.bananaHtml')
     setStaticText()

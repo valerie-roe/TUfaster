@@ -16,7 +16,6 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { IconSun, IconMoon } from '@tabler/icons-vue'
-import { t } from '@/lib/i18n'
 
 export default defineComponent({
   components: {

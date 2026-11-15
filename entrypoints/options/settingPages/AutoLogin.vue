@@ -114,7 +114,7 @@
 
 <script lang="ts">
 import { ref, defineComponent, watchEffect, computed } from 'vue'
-import { t } from '@/lib/i18n'
+
 
 // components
 import Input from '../components/Input.vue'

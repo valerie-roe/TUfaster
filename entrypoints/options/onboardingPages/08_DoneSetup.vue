@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import { t } from '@/lib/i18n'
+
 </script>
 
 <style lang="sass" scoped>

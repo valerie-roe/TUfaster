@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { t } from '@/lib/i18n'
+
 
 // components
 

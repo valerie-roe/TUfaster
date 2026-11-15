@@ -20,7 +20,7 @@
 <script lang="ts">
 import { defineComponent, type PropType, computed } from 'vue'
 import { useAllSettingsStatus } from '../composables/useAllSettingsStatus'
-import { t } from '@/lib/i18n'
+
 
 export default defineComponent({
   props: {

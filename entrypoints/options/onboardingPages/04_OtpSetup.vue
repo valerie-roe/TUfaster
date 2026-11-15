@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from 'vue'
-import { t } from '@/lib/i18n'
+
 
 // components
 import AutoLogin from '../settingPages/AutoLogin.vue'

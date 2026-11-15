@@ -26,7 +26,6 @@
 import { defineComponent, ref } from 'vue'
 import { time } from '../utilities'
 import { useChrome } from '../composables/chrome'
-import { t } from '@/lib/i18n'
 
 export default defineComponent({
   setup() {

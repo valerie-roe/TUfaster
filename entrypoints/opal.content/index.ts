@@ -1,5 +1,3 @@
-let opalParseCoursesStrings: typeof globalThis.TUFAST_STRINGS.opal;
-
 interface Course {
 	name: string;
 	link: string;
@@ -21,13 +19,9 @@ async function scrapeCourses() {
 	const showAll = qMust<HTMLAnchorElement>(".pager-showall");
 	const showAllText = showAll.innerText.trim().toLowerCase();
 	if (showAllText == "show all" || showAllText == "alle anzeigen") {
-		console.log("clicking");
 		const pendingMutation = waitForMutation(contentPanel);
 		clickVoidLink(showAll);
-		nextTick();
-		console.log("wating");
 		await pendingMutation;
-		console.log("resolved");
 	}
 
 	const container = qMust(".content-preview-container, tbody", contentPanel);
@@ -50,8 +44,8 @@ async function scrapeCourses() {
 
 	notify(
 		oldCourses
-			? opalParseCoursesStrings.coursesUpdated
-			: opalParseCoursesStrings.coursesSaved,
+			? t("content.opal.coursesUpdated")
+			: t("content.opal.coursesSaved"),
 	);
 }
 

@@ -44,7 +44,6 @@ import { defineComponent, onMounted, ref } from 'vue'
 import { isFirefox } from '@/lib/firefoxCheck'
 
 import rockets from '@/data/rockets.json'
-import { t } from '@/lib/i18n'
 
 import Link from './Link.vue'
 import { useChrome } from '../composables/chrome.ts'

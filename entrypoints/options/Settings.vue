@@ -191,7 +191,6 @@ import SearchEngines from './settingPages/SearchEngines.vue'
 import Rockets from './settingPages/Rockets.vue'
 import About from './settingPages/About.vue'
 import Contact from './settingPages/Contact.vue'
-import LanguageSelect from './settingPages/LanguageSelect.vue'
 import ChooseFaculty from './settingPages/ChooseFaculty.vue'
 
 // Onboarding Page Components
@@ -205,7 +204,6 @@ import SearchengineSetup from './onboardingPages/07_SearchengineSetup.vue'
 import DoneSetup from './onboardingPages/08_DoneSetup.vue'
 
 // configurations
-import { t } from '@/lib/i18n'
 import { getSettings } from './settings.ts'
 import { getOnboardingSteps } from './onboarding.ts'
 
@@ -216,7 +214,6 @@ import { useStepper } from './composables/stepper.ts'
 export default defineComponent({
   components: {
     ColorSwitch,
-    LanguageSelect,
     Statistics,
     SettingTile,
     Card,
@@ -476,7 +473,6 @@ export default defineComponent({
       toggleSetting,
       closeSetting,
       settings,
-      t,
       getSettingsByCategory,
       toggleTheme,
       animState

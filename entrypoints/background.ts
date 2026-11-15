@@ -8,13 +8,11 @@ import * as opalInline from '@/lib/opalInline'
 import { isFirefox } from '@/lib/firefoxCheck'
 import rockets from "@/data/rockets.json"
 import studies from '@/data/studies.json'
-import { initLocale, t } from '@/lib/i18n'
 
 
 export default defineBackground(() => {
     console.log("Service Worker Starting")
 
-    initLocale()
     // On installed/updated function
     browser.runtime.onInstalled.addListener(async (details) => {
         const reason = details.reason

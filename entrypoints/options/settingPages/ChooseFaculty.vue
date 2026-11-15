@@ -29,7 +29,7 @@
 import { defineComponent, type PropType, ref } from 'vue'
 import { useChrome } from '../composables/chrome'
 import studies from '@/data/studies.json'
-import { t } from '@/lib/i18n'
+
 
 export default defineComponent({
   props: {

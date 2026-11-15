@@ -1,9 +1,10 @@
-import { defineConfig } from 'wxt';
+import { defineConfig } from "wxt";
 
 // See https://wxt.dev/api/reference/wxt/interfaces/inlineconfig.html
 export default defineConfig({
-    modules: ['@wxt-dev/module-vue'],
-    manifest: {
-        permissions: ["storage", "system.cpu", "alarms"],
-    },
+	modules: ["@wxt-dev/module-vue", "@wxt-dev/i18n/module"],
+	manifest: {
+		permissions: ["storage", "system.cpu", "alarms"],
+		default_locale: "en",
+	},
 });

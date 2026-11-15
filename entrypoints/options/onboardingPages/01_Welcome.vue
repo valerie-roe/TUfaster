@@ -9,7 +9,6 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import lottie from 'lottie-web/build/player/lottie_light_canvas'
-import { t } from '@/lib/i18n'
 
 import onboardingRocketDark from '@/assets/settings/onboarding-rocket-fordark.json'
 import onboardingRocketLight from '@/assets/settings/onboarding-rocket-forlight.json'

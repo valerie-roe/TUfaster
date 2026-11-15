@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, onBeforeMount, ref, watch } from 'vue'
-import { t } from '@/lib/i18n'
+
 
 // components
 import Setting from '../components/Setting.vue'
@@ -21,7 +21,7 @@ export default defineComponent({
     const improveSelma = ref(true)
 
     onBeforeMount(async () => {
-      const { improveSelma: storedValue } = await chrome.storage.local.get(['improveSelma'])
+      const { improveSelma: storedValue } = await browser.storage.local.get(['improveSelma'])
 
       improveSelma.value = storedValue ?? true
       watch(improveSelma, valueUpdate)
@@ -29,7 +29,7 @@ export default defineComponent({
 
     const valueUpdate = async () => {
       // When we got here, we have the permission
-      await chrome.storage.local.set({
+      await browser.storage.local.set({
         improveSelma: improveSelma.value
       })
     }

@@ -63,7 +63,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { t } from '@/lib/i18n'
+
 
 export default defineComponent({
   setup() {
