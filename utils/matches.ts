@@ -1,5 +1,5 @@
-type URLPattern = string;
-type URL = string;
+export type URLPattern = string;
+export type URL = string;
 
 type Site<T> = T & { matches: Array<URLPattern> };
 type SiteName = string;
@@ -32,4 +32,13 @@ export function match_site<T>(
 	sites: Sites<T>,
 ): [SiteName, Site<T>] | undefined {
 	return Object.entries(sites).find((site) => matches_any(site[1].matches));
+}
+
+/** Turns patterns like `resource/courses*` into usable patterns  */
+export function partialPattern(pattern: URLPattern): URLPattern {
+	if (pattern.includes("://")) return pattern;
+
+	const path = pattern.startsWith("/") ? pattern : `/*${pattern}`;
+
+	return `*://*${path}`;
 }
