@@ -1,9 +1,3 @@
-interface Course {
-	name: string;
-	link: string;
-	favorite: boolean;
-}
-
 export default defineContentScript({
 	matches: ["https://bildungsportal.sachsen.de/opal/auth/resource/*"],
 
@@ -34,7 +28,7 @@ async function scrapeCourses() {
 	// Sort them by name
 	courses.sort((a, b) => a.name.localeCompare(b.name));
 
-	const { courses: oldCourses } = await browser.storage.local.get("courses");
+	const oldCourses = await store.courses.getValue();
 	console.log("old", oldCourses);
 	console.log("new", courses);
 

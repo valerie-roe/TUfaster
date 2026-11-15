@@ -5,8 +5,7 @@ export default defineContentScript({
 	matches: collectMatches(sites),
 
 	async main(ctx) {
-		const { isEnabled } = await browser.storage.local.get("isEnabled");
-		if (!isEnabled) return false;
+		if (!store.loginEnabled.getValue()) return;
 
 		const entry = match_site(sites);
 
