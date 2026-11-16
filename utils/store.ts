@@ -4,12 +4,13 @@ export interface Course {
 	favorite: boolean;
 }
 
+const def = storage.defineItem;
 export const store = {
-	forwardEnabled: storage.defineItem<boolean>("local:fwdEnabled", {
+	forwardEnabled: def<boolean>("local:fwdEnabled", {
 		fallback: false,
 	}),
-	loginEnabled: storage.defineItem<boolean>("local:isEnabled", {
+	loginEnabled: def<boolean>("local:isEnabled", {
 		fallback: false,
 	}),
-	courses: storage.defineItem<Course[]>("local:courses"), // TODO consider migration
+	courses: def<Course[]>("local:courses"), // TODO consider migration
 };
