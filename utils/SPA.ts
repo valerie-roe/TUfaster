@@ -17,7 +17,7 @@ export function spaMain(
 
 /** Resolves on the next DOM mutation under `target`, or rejects with `Errors.TIMEOUT`*/
 export function waitForMutation(
-	target: Node = document.body,
+	target: HTMLElement = document.body,
 	timeout?: number,
 ): Promise<void> {
 	return new Promise((resolve, reject) => {
@@ -29,14 +29,12 @@ export function waitForMutation(
 			}, timeout);
 		}
 
-		const observer = new MutationObserver(() => {
+		const observer = observe(target, () => {
 			if (timeout) {
 				clearTimeout(timer);
 			}
 			observer.disconnect();
 			resolve();
 		});
-
-		observer.observe(target, { subtree: true, childList: true });
 	});
 }

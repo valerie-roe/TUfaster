@@ -1,13 +1,19 @@
+import OpalHeader from "./OpalHeader.vue";
+
 export default defineContentScript({
-	matches: ["https://bildungsportal.sachsen.de/opal/auth/resource/*"],
+	matches: ["https://bildungsportal.sachsen.de/opal*"],
+	// cssInjectionMode: "ui",
 
 	async main(ctx) {
-		spaMain(ctx, scrapeCourses, partialPattern("resource/courses*"));
+		spaMain(ctx, scrapeCourses, pathPattern("auth/resource/courses*"));
+		await injectApp(ctx, OpalHeader, ".header-logo-container", {
+			append: "after",
+		});
 	},
 });
 
 async function scrapeCourses() {
-	console.log("scraping");
+	console.log("scraping courses");
 	const contentPanel = qMust(".table-panel");
 
 	const showAll = qMust<HTMLAnchorElement>(".pager-showall");

@@ -34,8 +34,11 @@ export function match_site<T>(
 	return Object.entries(sites).find((site) => matches_any(site[1].matches));
 }
 
-/** Turns patterns like `resource/courses*` into usable patterns  */
-export function partialPattern(pattern: URLPattern): URLPattern {
+/** Utility to match only the `Path` of a URL using "absolute" or "relative" patterns
+ *  Patterns prefixed by `/` are "absolute", meaning they only match the full path
+ *  Patterns without leading `/` are "relative", meaning they will match if the path just contains the pattern
+ */
+export function pathPattern(pattern: URLPattern): URLPattern {
 	if (pattern.includes("://")) return pattern;
 
 	const path = pattern.startsWith("/") ? pattern : `/*${pattern}`;

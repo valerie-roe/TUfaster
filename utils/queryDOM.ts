@@ -1,9 +1,8 @@
 export function q<T extends HTMLElement = HTMLElement>(
 	query: string,
-	parentNode?: HTMLElement,
+	parentNode: HTMLElement = document.body,
 ): T | undefined {
-	const queryNode = parentNode ? parentNode : document;
-	return queryNode.querySelector<T>(query) ?? undefined;
+	return parentNode.querySelector<T>(query) ?? undefined;
 }
 
 export function qMust<T extends HTMLElement = HTMLElement>(
@@ -17,10 +16,17 @@ export function qMust<T extends HTMLElement = HTMLElement>(
 
 export function qAll<T extends HTMLElement = HTMLElement>(
 	query: string,
-	parentNode?: HTMLElement,
+	parentNode: HTMLElement = document.body,
 ): Array<T> {
-	const queryNode = parentNode ? parentNode : document;
-	return Array.from(queryNode.querySelectorAll(query));
+	return Array.from(parentNode.querySelectorAll(query));
+}
+
+export function observe(target: HTMLElement, cb: () => void) {
+	const observer = new MutationObserver(cb);
+
+	observer.observe(target, { subtree: true, childList: true });
+
+	return observer;
 }
 
 /**
